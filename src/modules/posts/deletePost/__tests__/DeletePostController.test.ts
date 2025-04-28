@@ -55,7 +55,6 @@ describe('DeletePostController', () => {
   });
 
   it('should return 500 for unexpected errors', async () => {
-
     (DeletePostService.prototype.execute as jest.Mock).mockRejectedValueOnce(new Error('Unexpected error'));
 
     await deletePostController.handle(req as Request, res as Response);

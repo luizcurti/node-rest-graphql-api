@@ -27,8 +27,8 @@ describe('GetPostByIdController', () => {
     await controller.handle(req, res);
 
     expect(GetPostByIdService.prototype.execute).toHaveBeenCalledWith('post123');
-    expect(res.status).toHaveBeenCalledWith(200); 
-    expect(res.json).toHaveBeenCalledWith(mockPost); /
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(mockPost);
   });
 
   it('should return 404 if post not found', async () => {
@@ -36,14 +36,14 @@ describe('GetPostByIdController', () => {
 
     const req = { params: { id: 'post123' } } as unknown as Request;
     const res = {
-      status: jest.fn().mockReturnThis(), 
+      status: jest.fn().mockReturnThis(),
       json: jest.fn(),
     } as unknown as Response;
 
     await controller.handle(req, res);
 
     expect(GetPostByIdService.prototype.execute).toHaveBeenCalledWith('post123');
-    expect(res.status).toHaveBeenCalledWith(404); 
+    expect(res.status).toHaveBeenCalledWith(404);
     expect(res.json).toHaveBeenCalledWith({ message: 'Post not found' });
   });
 
