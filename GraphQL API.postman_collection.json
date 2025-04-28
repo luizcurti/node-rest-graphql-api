@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "5542bd2f-b02b-4954-a76c-2d613c1e07e7",
+		"name": "GraphQL API for Posts and Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43702418"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createPost($input: PostInput!) { createPost(input: $input) { _id title content author { _id name username } createdAt } }",
+								"variables": {
+									"input": {
+										"title": "New Post Title",
+										"content": "Content here",
+										"author": "user_id_here"
+									}
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updatePost($id: ID!, $input: UpdatePostInput!) { updatePost(id: $id, input: $input) { _id title content author { _id name username } createdAt } }",
+								"variables": {
+									"id": "post_id_here",
+									"input": {
+										"title": "Updated Post Title",
+										"content": "Updated content of the post."
+									}
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation deletePost($id: ID!) { deletePost(id: $id) }",
+								"variables": {
+									"id": "post_id_here"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getAllPosts { getAllPosts { _id title content author { _id name username } createdAt } }"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post by ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getPostById($id: ID!) { getPostById(id: $id) { _id title content author { _id name username } createdAt } }",
+								"variables": {
+									"id": "post_id_here"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Posts by User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getPostsByUser($idUser: ID!) { getPostsByUser(idUser: $idUser) { _id title content author { _id name username } createdAt } }",
+								"variables": {
+									"idUser": "user_id_here"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createUser($input: UserInput!) { createUser(input: $input) { _id name username createdAt } }",
+								"variables": {
+									"input": {
+										"name": "John Doe",
+										"username": "john_doe"
+									}
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateUser($id: ID!, $input: UpdateUserInput!) { updateUser(id: $id, input: $input) { _id name username createdAt } }",
+								"variables": {
+									"id": "user_id_here",
+									"input": {
+										"name": "John Updated",
+										"username": "john_updated"
+									}
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getAllUsers { getAllUsers { _id name username createdAt } }"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation deleteUser($id: ID!) { deleteUser(id: $id) }",
+								"variables": {
+									"id": "user_id_here"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getUserById($id: ID!) { getUserById(id: $id) { _id name username createdAt } }",
+								"variables": {
+									"id": "user_id_here"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4003/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4003",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

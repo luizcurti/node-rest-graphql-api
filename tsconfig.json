@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "paths": {
+      "@modules/*": ["src/modules/*"],
+      "@models/*": ["src/models/*"],
+      "@users-controllers/*": ["src/modules/users/*"],
+      "@users-services/*": ["src/modules/users/*"],
+      "@posts-controllers/*": ["src/modules/posts/*"],
+      "@posts-services/*": ["src/modules/posts/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@routes/*": ["src/routes/*"],
+      "@tests/*": ["src/tests/*"],
+      "@mocks/*": ["src/mocks/*"]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
