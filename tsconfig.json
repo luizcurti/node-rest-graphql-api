@@ -6,20 +6,24 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["src/modules/*"],
-      "@models/*": ["src/models/*"],
-      "@users-controllers/*": ["src/modules/users/*"],
-      "@users-services/*": ["src/modules/users/*"],
-      "@posts-controllers/*": ["src/modules/posts/*"],
-      "@posts-services/*": ["src/modules/posts/*"],
-      "@middlewares/*": ["src/middlewares/*"],
-      "@routes/*": ["src/routes/*"],
-      "@tests/*": ["src/tests/*"],
-      "@mocks/*": ["src/mocks/*"]
+      "@modules/*": ["./modules/*"],
+      "@models/*": ["./models/*"],
+      "@users-controllers/*": ["./modules/users/*"],
+      "@users-services/*": ["./modules/users/*"],
+      "@posts-controllers/*": ["./modules/posts/*"],
+      "@posts-services/*": ["./modules/posts/*"],
+      "@middlewares/*": ["./middlewares/*"],
+      "@routes/*": ["./routes/*"],
+      "@tests/*": ["./tests/*"],
+      "@mocks/*": ["./mocks/*"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"]
 }
