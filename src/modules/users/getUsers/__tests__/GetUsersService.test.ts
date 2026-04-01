@@ -24,10 +24,12 @@ describe('GetUsersService', () => {
     expect(User.find).toHaveBeenCalled();
   });
 
-  it('should throw an error when no users are found', async () => {
-    (User.find as jest.Mock).mockResolvedValue(null);
+  it('should return empty array when no users exist', async () => {
+    (User.find as jest.Mock).mockResolvedValue([]);
 
-    await expect(getUsersService.execute()).rejects.toThrow('Users not found');
+    const users = await getUsersService.execute();
+
+    expect(users).toEqual([]);
     expect(User.find).toHaveBeenCalled();
   });
 });

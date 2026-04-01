@@ -16,7 +16,7 @@ class CreateUserController {
         username,
       });
 
-      return res.status(200).json(user);
+      return res.status(201).json(user);
     } catch (error) {
       const statusCode = error.message === 'User already exists!' ? 400 : 500;
 

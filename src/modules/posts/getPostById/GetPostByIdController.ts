@@ -9,13 +9,12 @@ class GetPostByIdController {
       const getPostByIdService = new GetPostByIdService();
       const post = await getPostByIdService.execute(id);
 
-      if (!post) {
-        return res.status(404).json({ message: 'Post not found' });
-      }
-
       return res.status(200).json(post);
     } catch (error) {
-      return res.status(500).json({ message: error.message || 'Internal server error' });
+      if (error instanceof Error && error.message === 'Post not found') {
+        return res.status(404).json({ message: 'Post not found' });
+      }
+      return res.status(500).json({ message: error instanceof Error ? error.message : 'Internal server error' });
     }
   }
 }

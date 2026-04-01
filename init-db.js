@@ -1,4 +1,4 @@
 // eslint-disable-next-line no-undef
-db = db.getSiblingDB('my_database');
+db = db.getSiblingDB('code_drops');
 // eslint-disable-next-line no-undef
-db.createCollection('code_drops');
+db.createCollection('users');

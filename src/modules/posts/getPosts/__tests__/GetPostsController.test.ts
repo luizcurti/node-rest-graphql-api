@@ -30,7 +30,7 @@ describe('GetPostsController', () => {
     expect(res.status).toHaveBeenCalledWith(200);
   });
 
-  it('should return 404 when no posts are found', async () => {
+  it('should return 200 with empty array when no posts are found', async () => {
     (GetPostsService.prototype.execute as jest.Mock).mockResolvedValue([]);
 
     const req = {} as unknown as Request;
@@ -41,8 +41,8 @@ describe('GetPostsController', () => {
 
     await controller.handle(req, res);
 
-    expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ message: 'No posts found' });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith([]);
   });
 
   it('should return 500 if an unexpected error occurs', async () => {

@@ -7,7 +7,7 @@ class UpdateUserController {
       const { id } = req.params;
       const { name, username } = req.body;
 
-      if (!id && (!name || !username)) {
+      if (!id || (!name && !username)) {
         return res.status(400).json({ message: 'Validation failed: Missing required fields.' });
       }
 

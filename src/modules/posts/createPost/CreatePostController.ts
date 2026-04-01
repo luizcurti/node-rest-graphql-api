@@ -18,7 +18,7 @@ class CreatePostController {
         author,
       });
 
-      return res.status(200).json(post);
+      return res.status(201).json(post);
     } catch (error) {
       return res.status(500).json({ message: error.message || 'Internal server error' });
     }

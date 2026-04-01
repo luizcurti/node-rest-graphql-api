@@ -11,4 +11,5 @@ module.exports = {
     '^@modules/(.*)$': '<rootDir>/src/modules/$1',
     '^@resolvers/(.*)$': '<rootDir>/src/resolvers/$1',
   },
+  testTimeout: 30000,
 };

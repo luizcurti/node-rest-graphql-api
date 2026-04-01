@@ -100,12 +100,10 @@ describe('UpdateUserController', () => {
     expect(res.json).toHaveBeenCalledWith({ message: 'Unexpected error' });
   });
 
-  it('should continue normally if id is present even without name and username', async () => {
-    (UpdateUserService.prototype.execute as jest.Mock).mockResolvedValue({ id: '123', name: 'Test', username: 'testuser' });
-
+  it('should return 400 if id is present but neither name nor username provided', async () => {
     const req = {
       params: { id: '123' },
-      body: { },
+      body: {},
     } as unknown as Request;
 
     const res = {
@@ -115,8 +113,9 @@ describe('UpdateUserController', () => {
 
     await updateUserController.handle(req, res);
 
-    expect(UpdateUserService.prototype.execute).toHaveBeenCalledWith({ id: '123', name: undefined, username: undefined });
-    expect(res.json).toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Validation failed: Missing required fields.' });
+    expect(UpdateUserService.prototype.execute).not.toHaveBeenCalled();
   });
 
   it('should return 500 with default message if error has no message', async () => {

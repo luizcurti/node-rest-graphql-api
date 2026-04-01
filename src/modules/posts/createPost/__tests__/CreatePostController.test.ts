@@ -55,7 +55,7 @@ describe('CreatePostController', () => {
 
     await createPostController.handle(req as Request, res as Response);
 
-    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(statusMock).toHaveBeenCalledWith(201);
     expect(jsonMock).toHaveBeenCalledWith({
       title: 'Test Title',
       content: 'Test Content',

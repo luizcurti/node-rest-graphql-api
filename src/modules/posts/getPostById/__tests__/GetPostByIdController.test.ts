@@ -32,7 +32,7 @@ describe('GetPostByIdController', () => {
   });
 
   it('should return 404 if post not found', async () => {
-    (GetPostByIdService.prototype.execute as jest.Mock).mockResolvedValue(null);
+    (GetPostByIdService.prototype.execute as jest.Mock).mockRejectedValue(new Error('Post not found'));
 
     const req = { params: { id: 'post123' } } as unknown as Request;
     const res = {

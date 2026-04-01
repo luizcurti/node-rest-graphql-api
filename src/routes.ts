@@ -35,9 +35,9 @@ routes.delete('/users/:id', deleteUserController.handle);
 
 routes.post('/posts', createPostController.handle);
 routes.get('/posts', getPostsController.handle);
+routes.get('/posts/user/:id', getPostsByUserController.handle);
 routes.get('/posts/:id', getPostByIdController.handle);
 routes.put('/posts/:id', updatePostController.handle);
 routes.delete('/posts/:id', deletePostController.handle);
-routes.get('/posts/user/:id', getPostsByUserController.handle);
 
 export { routes };

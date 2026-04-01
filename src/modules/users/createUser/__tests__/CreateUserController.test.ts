@@ -37,7 +37,7 @@ describe('CreateUserController', () => {
       username: 'johndoe',
     });
     expect(jsonMock).toHaveBeenCalledWith(createdUser);
-    expect(statusMock).toHaveBeenCalledWith(200);
+    expect(statusMock).toHaveBeenCalledWith(201);
   });
 
   it('should return 400 if validation fails', async () => {

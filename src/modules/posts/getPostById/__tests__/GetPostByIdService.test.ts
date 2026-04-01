@@ -26,14 +26,12 @@ describe('GetPostByIdService', () => {
     expect(result).toEqual(mockPost);
   });
 
-  it('should return null if no post is found', async () => {
+  it('should throw error if no post is found', async () => {
     const populateMock = jest.fn().mockReturnThis();
     const execMock = jest.fn().mockResolvedValue(null);
     (Post.findById as jest.Mock).mockReturnValue({ populate: populateMock, exec: execMock });
 
-    const result = await service.execute('post123');
-
-    expect(result).toBeNull();
+    await expect(service.execute('post123')).rejects.toThrow('Post not found');
   });
 
   it('should throw error if Post.findById fails', async () => {

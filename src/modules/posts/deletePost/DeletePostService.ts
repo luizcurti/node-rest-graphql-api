@@ -1,16 +1,12 @@
 import { Post } from '@models/Post';
 
 class DeletePostService {
-  async execute(id: string): Promise<boolean> {
-    const post = await Post.findById(id);
+  async execute(id: string): Promise<void> {
+    const post = await Post.findByIdAndDelete(id);
 
     if (!post) {
       throw new Error('Post not found');
     }
-
-    await Post.findByIdAndDelete(id);
-
-    return true;
   }
 }
 
