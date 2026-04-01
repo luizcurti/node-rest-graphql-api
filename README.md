@@ -1,49 +1,115 @@
-# Node.js API with REST and GraphQL Endpoints
+# Node.js REST + GraphQL API
 
-## Description
-This project is a Node.js backend API built with GraphQL for querying and mutating data. It focuses on modularity and scalability, ensuring that the API is easy to maintain and extend. The project follows best practices, such as using Apollo Server for the GraphQL layer, and also includes authentication, authorization, and database interaction functionalities.
+A Node.js backend API that exposes both a REST and a GraphQL interface for managing **Users** and **Posts**. Built with Express, Mongoose, and TypeScript, following a modular architecture with one file per use case.
 
-## Features
-* GraphQL API: Interact with the backend using GraphQL.
-* Apollo Server: Handles GraphQL requests.
-* Node.js & Express: Backend built with Node.js and Express.
-* MongoDB: NoSQL database for data storage.
-* Modular & Scalable: Easy to add new features and endpoints.
+## Tech Stack
+
+- **Node.js** + **Express** + **TypeScript**
+- **MongoDB** + **Mongoose** — data storage
+- **GraphQL** via `express-graphql` + `@graphql-tools/schema`
+- **Jest** + **ts-jest** — unit and E2E testing
+- **Supertest** — HTTP testing
+- **mongodb-memory-server** — in-memory MongoDB for fast tests
+- **Docker Compose** — real MongoDB for E2E tests
+- **ESLint** (airbnb-base) — code linting
+
+## Prerequisites
+
+- Node.js >= 18.0.0
+- Docker (for E2E tests against a real MongoDB instance)
 
 ## Installation
-Make sure you have the following installed:
-- Node.js (>=18.0.0)
 
-## Steps
 1. Clone the repository:
-- git clone https://github.com/luizcurti/node-rest-graphql-api.git
+```bash
+git clone https://github.com/luizcurti/node-rest-graphql-api.git
+cd node-rest-graphql-api
+```
 
-2. Navigate to the project directory:
-- cd node-rest-graphql-api
+2. Install dependencies:
+```bash
+npm install
+```
 
-3. Install dependencies:
-- npm install
+3. Start the development server:
+```bash
+npm run dev
+```
 
-## Run the application:
-- npm run dev
+The server starts at **http://localhost:4003**.
 
-The server will start running on http://localhost:4003 (or the port you specified).
+## REST API Endpoints
 
-## GraphQL Playground
-Once the application is running, you can test your GraphQL queries and mutations by navigating to the following URL:
+### Users
 
-http://localhost:4003/graphql
+| Method | Route | Description |
+|--------|-------|-------------|
+| `POST` | `/users` | Create a user |
+| `GET` | `/users` | List all users |
+| `GET` | `/users/:id` | Get user by ID |
+| `PUT` | `/users/:id` | Update a user |
+| `DELETE` | `/users/:id` | Delete a user |
 
-This will open up the GraphQL Playground where you can interact with the API by writing GraphQL queries and mutations.
+### Posts
+
+| Method | Route | Description |
+|--------|-------|-------------|
+| `POST` | `/posts` | Create a post |
+| `GET` | `/posts` | List all posts |
+| `GET` | `/posts/:id` | Get post by ID |
+| `GET` | `/posts/user/:id` | Get all posts by a user |
+| `PUT` | `/posts/:id` | Update a post |
+| `DELETE` | `/posts/:id` | Delete a post |
+
+## GraphQL API
+
+The GraphQL endpoint is available at **http://localhost:4003/graphql**.
+
+### Queries
+- `getAllUsers` — list all users
+- `getUserById(id)` — get user by ID
+- `getAllPosts` — list all posts
+- `getPostById(id)` — get post by ID
+- `getPostsByUser(idUser)` — get all posts by a user
+
+### Mutations
+- `createUser(input)` — create a user
+- `updateUser(id, input)` — update a user
+- `deleteUser(id)` — delete a user
+- `createPost(input)` — create a post
+- `updatePost(id, input)` — update a post
+- `deletePost(id)` — delete a post
 
 ## Postman Collections
-Additionally, we have two Postman collections available at the root of the project:
 
-- GraphQL API.postman_collection.json
-- REST API.postman_collection.json
+Two Postman collections are available at the root of the project. Import either into Postman to get pre-configured requests:
 
-You can easily import these collections into Postman and start testing the respective APIs with pre-configured requests.
+- `REST API.postman_collection.json` — all 11 REST endpoints
+- `graphql_api.postman_collection.json` — all GraphQL queries and mutations
 
 ## Running Tests
-To run the tests for the application, you can use the following command:
-- npm run test 
+
+### Unit tests + in-memory E2E tests
+```bash
+npm test
+```
+Runs 26 test suites, 162 tests.
+
+### E2E tests with real Docker MongoDB
+```bash
+npm run test:e2e
+```
+Spins up the MongoDB Docker container defined in `docker-compose.yml`, runs 4 test suites (96 tests) against a real database, then tears down the test database.
+
+### Lint
+```bash
+npm run eslint
+```
+
+## Build
+
+```bash
+npm run build   # compiles TypeScript to dist/
+npm start       # runs the compiled output
+```
+

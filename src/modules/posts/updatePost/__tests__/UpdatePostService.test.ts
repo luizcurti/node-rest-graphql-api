@@ -11,9 +11,9 @@ describe('UpdatePostService', () => {
     jest.clearAllMocks();
   });
 
-  it('deve atualizar o título e conteúdo do post', async () => {
+  it('should update the post title and content', async () => {
     const mockPost = {
-      åid: '1', title: 'Old Title', content: 'Old Content', save: jest.fn(),
+      id: '1', title: 'Old Title', content: 'Old Content', save: jest.fn(),
     };
 
     (Post.findById as jest.Mock).mockResolvedValue(mockPost);
@@ -29,7 +29,7 @@ describe('UpdatePostService', () => {
     expect(result).toEqual(mockPost);
   });
 
-  it('deve lançar erro se o post não for encontrado', async () => {
+  it('should throw an error if the post is not found', async () => {
     (Post.findById as jest.Mock).mockResolvedValue(null);
 
     const updateData = { id: '1', title: 'New Title', content: 'New Content' };
@@ -37,7 +37,7 @@ describe('UpdatePostService', () => {
     await expect(service.execute(updateData)).rejects.toThrow('Post not found');
   });
 
-  it('deve atualizar apenas o título do post', async () => {
+  it('should update only the post title', async () => {
     const mockPost = {
       id: '1', title: 'Old Title', content: 'Old Content', save: jest.fn(),
     };
@@ -54,7 +54,7 @@ describe('UpdatePostService', () => {
     expect(result).toEqual(mockPost);
   });
 
-  it('deve atualizar apenas o conteúdo do post', async () => {
+  it('should update only the post content', async () => {
     const mockPost = {
       id: '1', title: 'Old Title', content: 'Old Content', save: jest.fn(),
     };

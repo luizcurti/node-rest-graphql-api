@@ -13,7 +13,7 @@ jest.mock('@modules/users/getUserById/GetUserByIdService');
 
 describe('User Resolvers', () => {
   describe('createUser Resolver', () => {
-    it('deve criar um novo usuário', async () => {
+    it('should create a new user', async () => {
       const mockExecute = jest.fn().mockResolvedValue({
         _id: '123',
         name: 'John Doe',
@@ -38,7 +38,7 @@ describe('User Resolvers', () => {
       expect(mockExecute).toHaveBeenCalledWith({ name: 'John Doe', username: 'johndoe' });
     });
 
-    it('deve lançar erro caso o usuário já exista', async () => {
+    it('should throw an error if the user already exists', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error('User already exists!'));
 
       CreateUserService.prototype.execute = mockExecute;
@@ -51,7 +51,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('User already exists!');
     });
 
-    it('deve lançar erro de validação se os campos obrigatórios estiverem ausentes', async () => {
+    it('should throw a validation error if required fields are missing', async () => {
       await expect(
         usersResolvers.Mutation.createUser(
           null,
@@ -60,7 +60,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('Validation failed: Missing required fields.');
     });
 
-    it('deve lançar erro de servidor interno caso erro sem message', async () => {
+    it('should throw an internal server error if error has no message', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error());
 
       CreateUserService.prototype.execute = mockExecute;
@@ -75,7 +75,7 @@ describe('User Resolvers', () => {
   });
 
   describe('updateUser Resolver', () => {
-    it('deve atualizar um usuário', async () => {
+    it('should update a user', async () => {
       const mockExecute = jest.fn().mockResolvedValue({
         _id: '123',
         name: 'John Doe Updated',
@@ -104,7 +104,7 @@ describe('User Resolvers', () => {
       });
     });
 
-    it('deve lançar erro se o usuário não for encontrado', async () => {
+    it('should throw an error if the user is not found', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error('User not found'));
 
       UpdateUserService.prototype.execute = mockExecute;
@@ -117,7 +117,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('User not found');
     });
 
-    it('deve lançar erro de validação se o ID estiver ausente', async () => {
+    it('should throw a validation error if the ID is missing', async () => {
       await expect(
         usersResolvers.Mutation.updateUser(
           null,
@@ -126,7 +126,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('Validation failed: Missing required fields.');
     });
 
-    it('deve lançar erro de validação se nem name nem username forem fornecidos', async () => {
+    it('should throw a validation error if neither name nor username are provided', async () => {
       await expect(
         usersResolvers.Mutation.updateUser(
           null,
@@ -135,7 +135,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('Validation failed: Missing required fields.');
     });
 
-    it('deve lançar erro de servidor interno caso erro sem message', async () => {
+    it('should throw an internal server error if error has no message', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error());
 
       UpdateUserService.prototype.execute = mockExecute;
@@ -150,7 +150,7 @@ describe('User Resolvers', () => {
   });
 
   describe('deleteUser Resolver', () => {
-    it('deve deletar um usuário', async () => {
+    it('should delete a user', async () => {
       const mockExecute = jest.fn().mockResolvedValue(null);
 
       DeleteUserService.prototype.execute = mockExecute;
@@ -163,7 +163,7 @@ describe('User Resolvers', () => {
       expect(response).toBe(true);
     });
 
-    it('deve lançar erro se o usuário não for encontrado', async () => {
+    it('should throw an error if the user is not found', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error('User not found'));
 
       DeleteUserService.prototype.execute = mockExecute;
@@ -176,7 +176,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('User not found');
     });
 
-    it('deve lançar erro de validação se o ID estiver ausente', async () => {
+    it('should throw a validation error if the ID is missing', async () => {
       await expect(
         usersResolvers.Mutation.deleteUser(
           null,
@@ -185,7 +185,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('Validation failed: Missing user ID.');
     });
 
-    it('deve lançar erro de servidor interno caso erro sem message', async () => {
+    it('should throw an internal server error if error has no message', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error());
 
       DeleteUserService.prototype.execute = mockExecute;
@@ -200,7 +200,7 @@ describe('User Resolvers', () => {
   });
 
   describe('getAllUsers Resolver', () => {
-    it('deve retornar todos os usuários', async () => {
+    it('should return all users', async () => {
       const mockExecute = jest.fn().mockResolvedValue([
         {
           _id: '123', name: 'John Doe', username: 'johndoe', createdAt: new Date(),
@@ -218,7 +218,7 @@ describe('User Resolvers', () => {
       ]);
     });
 
-    it('deve lançar erro se não encontrar usuários', async () => {
+    it('should throw an error if no users are found', async () => {
       const mockExecute = jest.fn().mockResolvedValue(null);
 
       GetUsersService.prototype.execute = mockExecute;
@@ -228,7 +228,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('Users not found');
     });
 
-    it('deve lançar erro se a lista de usuários for vazia', async () => {
+    it('should throw an error if the user list is empty', async () => {
       const mockExecute = jest.fn().mockResolvedValue([]);
 
       GetUsersService.prototype.execute = mockExecute;
@@ -238,7 +238,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('Users not found');
     });
 
-    it('deve lançar erro de servidor interno caso erro sem message', async () => {
+    it('should throw an internal server error if error has no message', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error());
 
       GetUsersService.prototype.execute = mockExecute;
@@ -250,7 +250,7 @@ describe('User Resolvers', () => {
   });
 
   describe('getUserById Resolver', () => {
-    it('deve retornar o usuário pelo ID', async () => {
+    it('should return a user by ID', async () => {
       const mockExecute = jest.fn().mockResolvedValue({
         _id: '123',
         name: 'John Doe',
@@ -273,7 +273,7 @@ describe('User Resolvers', () => {
       });
     });
 
-    it('deve lançar erro se o usuário não for encontrado', async () => {
+    it('should throw an error if the user is not found', async () => {
       const mockExecute = jest.fn().mockResolvedValue(null);
 
       GetUserByIdService.prototype.execute = mockExecute;
@@ -286,7 +286,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('User not found');
     });
 
-    it('deve lançar erro de validação se o ID estiver ausente', async () => {
+    it('should throw a validation error if the ID is missing', async () => {
       await expect(
         usersResolvers.Query.getUserById(
           null,
@@ -295,7 +295,7 @@ describe('User Resolvers', () => {
       ).rejects.toThrow('Validation failed: Missing user ID.');
     });
 
-    it('deve lançar erro de servidor interno caso erro sem message', async () => {
+    it('should throw an internal server error if error has no message', async () => {
       const mockExecute = jest.fn().mockRejectedValue(new Error());
 
       GetUserByIdService.prototype.execute = mockExecute;

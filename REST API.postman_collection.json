@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "USER",
+			"name": "Users",
 			"item": [
 				{
 					"name": "REST - Create User",
@@ -159,7 +159,7 @@
 			]
 		},
 		{
-			"name": "POST",
+			"name": "Posts",
 			"item": [
 				{
 					"name": "REST - Create Post",

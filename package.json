@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
+    "test:e2e": "jest --config jest.e2e.config.js --runInBand --forceExit",
     "eslint": "eslint . --ext .ts",
     "dev": "ts-node-dev --respawn --watch 'src/**' --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/server.ts",
     "build": "tsc && cp -r src/schemas/*.graphql dist/schemas/ && tsc-alias",

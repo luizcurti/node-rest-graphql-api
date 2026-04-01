@@ -4,8 +4,21 @@ import { DeletePostService } from '../modules/posts/deletePost/DeletePostService
 import { GetPostsService } from '../modules/posts/getPosts/GetPostsService';
 import { GetPostByIdService } from '../modules/posts/getPostById/GetPostByIdService';
 import { GetPostsByUserService } from '../modules/posts/getPostsByUser/GetPostsByUserService';
+import { User } from '../models/User';
 
 const postsResolvers = {
+  // Field-level resolver: resolves author when it isn't already populated
+  Post: {
+    async author(parent: { author: unknown }) {
+      if (!parent.author) return null;
+      // Already a full User document (populated by service)
+      const authorObj = parent.author as Record<string, unknown>;
+      if (authorObj.username !== undefined) return parent.author;
+      // Raw ObjectId – fetch from DB
+      return User.findById(parent.author);
+    },
+  },
+
   Mutation: {
     async createPost(_, { input }) {
       try {
